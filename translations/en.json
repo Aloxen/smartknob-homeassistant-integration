@@ -1,0 +1,39 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Add SmartKnob",
+        "description": "Enter the name and IP address of your SmartKnob device.",
+        "data": {
+          "device_name": "Device Name",
+          "device_ip": "IP Address"
+        }
+      }
+    },
+    "abort": {
+      "already_configured": "This device is already configured."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "SmartKnob Configuration (YAML)",
+        "description": "Edit the menu and screen layout for your SmartKnob. The configuration is automatically sent to the device upon saving.",
+        "data": {
+          "config_yaml": "Menu Configuration (YAML)"
+        }
+      }
+    },
+    "error": {
+      "invalid_yaml": "Invalid YAML format. Please check syntax.",
+      "invalid_yaml_structure": "YAML must be a dictionary (e.g. smartknob: ...)."
+    }
+  },
+  "entity": {
+    "button": {
+      "push_config": {
+        "name": "Send Configuration"
+      }
+    }
+  }
+}

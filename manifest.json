@@ -1,0 +1,12 @@
+{
+  "domain": "smartknob",
+  "name": "SmartKnob",
+  "codeowners": ["@alexanderludewig"],
+  "config_flow": true,
+  "documentation": "https://github.com/scottbez1/smartknob",
+  "integration_type": "device",
+  "iot_class": "local_push",
+  "issue_tracker": "https://github.com/scottbez1/smartknob/issues",
+  "requirements": ["pyyaml"],
+  "version": "1.0.0"
+}

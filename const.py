@@ -1,0 +1,54 @@
+"""Constants for the SmartKnob integration."""
+
+DOMAIN = "smartknob"
+
+CONF_DEVICE_NAME = "device_name"
+CONF_DEVICE_IP = "device_ip"
+CONF_CONFIG_YAML = "config_yaml"
+
+EVENT_SMARTKNOB_CONFIG = "smartknob_config"
+SERVICE_PUSH_CONFIG = "push_config"
+
+DEFAULT_CONFIG_YAML = """smartknob:
+  device:
+    name: "Wohnzimmer Knob"
+    ip: "192.168.178.133"
+
+  menu:
+    - label: "Wohnzimmer"
+      icon: lightbulb
+      color: "#FFAA00"
+      type: submenu
+      children:
+        - label: "WLED Helligkeit"
+          icon: brightness
+          color: "#FFAA00"
+          type: screen
+          screen: brightness
+          entity_id: light.wohnzimmer_wled
+          options:
+            presets:
+              - { label: "Rainbow", preset: "1", color: "#FF00FF" }
+              - { label: "Cozy",    preset: "2", color: "#FF6600" }
+
+        - label: "Stehlampe"
+          icon: power
+          color: "#FFFFFF"
+          type: screen
+          screen: switch
+          entity_id: switch.stehlampe
+          options:
+            power_sensor: sensor.stehlampe_power
+            power_threshold: 60
+
+        - label: "Energie"
+          icon: info
+          color: "#00CCFF"
+          type: screen
+          screen: info
+          options:
+            items:
+              - { label: "Verbrauch", type: value, entity_id: sensor.stromverbrauch, unit: "W" }
+              - { label: "Heute",     type: gauge, entity_id: sensor.energie_heute, unit: "kWh", min: 0, max: 20 }
+              - { label: "Verlauf",   type: chart, entity_id: sensor.stromverbrauch, time_range_hours: 24 }
+"""
