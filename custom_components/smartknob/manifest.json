@@ -8,5 +8,5 @@
   "iot_class": "local_push",
   "issue_tracker": "https://github.com/scottbez1/smartknob/issues",
   "requirements": ["pyyaml"],
-  "version": "1.1.0"
+  "version": "1.2.0"
 }
