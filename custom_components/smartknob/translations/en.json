@@ -17,8 +17,8 @@
   "options": {
     "step": {
       "init": {
-        "title": "SmartKnob Configuration (YAML)",
-        "description": "Edit the menu and screen layout for your SmartKnob. The configuration is automatically sent to the device upon saving.",
+        "title": "SmartKnob Configuration: {device_name}",
+        "description": "The configuration for this device is stored in '{filename}' inside your Home Assistant config directory. You can edit it here or directly in the file. Upon saving, it is automatically pushed to the device.",
         "data": {
           "config_yaml": "Menu Configuration (YAML)"
         }

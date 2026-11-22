@@ -1,0 +1,15 @@
+push_config:
+  name: Konfiguration senden
+  description: Sendet die Menü- und Screen-Konfiguration an den SmartKnob.
+  fields:
+    entry_id:
+      name: Geräte-ID
+      description: Optionale Config-Entry-ID des gewünschten SmartKnob.
+      selector:
+        config_entry:
+          integration: smartknob
+    config:
+      name: Konfiguration
+      description: Optionales Menü-Dictionary, falls nicht die Datei verwendet werden soll.
+      selector:
+        object:

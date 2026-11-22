@@ -2,37 +2,37 @@
   "config": {
     "step": {
       "user": {
-        "title": "SmartKnob hinzufügen",
-        "description": "Gib den Namen und die IP-Adresse deines SmartKnob ein.",
+        "title": "Add SmartKnob",
+        "description": "Enter the name and IP address of your SmartKnob device.",
         "data": {
-          "device_name": "Gerätename",
-          "device_ip": "IP-Adresse"
+          "device_name": "Device Name",
+          "device_ip": "IP Address"
         }
       }
     },
     "abort": {
-      "already_configured": "Dieses Gerät ist bereits konfiguriert."
+      "already_configured": "This device is already configured."
     }
   },
   "options": {
     "step": {
       "init": {
-        "title": "SmartKnob Konfiguration (YAML)",
-        "description": "Bearbeite hier das Menü- und Screen-Layout für deinen SmartKnob. Die Konfiguration wird beim Speichern automatisch an das Gerät gesendet.",
+        "title": "SmartKnob Configuration: {device_name}",
+        "description": "The configuration for this device is stored in '{filename}' inside your Home Assistant config directory. You can edit it here or directly in the file. Upon saving, it is automatically pushed to the device.",
         "data": {
-          "config_yaml": "Menü-Konfiguration (YAML)"
+          "config_yaml": "Menu Configuration (YAML)"
         }
       }
     },
     "error": {
-      "invalid_yaml": "Ungültiges YAML-Format. Bitte Syntax überprüfen.",
-      "invalid_yaml_structure": "YAML muss ein Dictionary sein (z.B. smartknob: ...)."
+      "invalid_yaml": "Invalid YAML format. Please check syntax.",
+      "invalid_yaml_structure": "YAML must be a dictionary (e.g. smartknob: ...)."
     }
   },
   "entity": {
     "button": {
       "push_config": {
-        "name": "Konfiguration senden"
+        "name": "Send Configuration"
       }
     }
   }
