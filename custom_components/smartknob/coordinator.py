@@ -43,11 +43,28 @@ class SmartKnobCoordinator(DataUpdateCoordinator):
 
     @property
     def config_yaml(self) -> str:
-        """Return the current YAML config."""
-        return self.entry.options.get(
+        """Return the current YAML config (from smartknob.yaml or entry options)."""
+        file_path = self.hass.config.path("smartknob.yaml")
+        try:
+            with open(file_path, "r", encoding="utf-8") as f:
+                content = f.read()
+                if content.strip():
+                    return content
+        except Exception:
+            pass
+
+        # If file does not exist, write default template
+        fallback = self.entry.options.get(
             CONF_CONFIG_YAML,
             self.entry.data.get(CONF_CONFIG_YAML, DEFAULT_CONFIG_YAML),
         )
+        try:
+            with open(file_path, "w", encoding="utf-8") as f:
+                f.write(fallback)
+        except Exception as ex:
+            _LOGGER.debug("Could not write initial smartknob.yaml: %s", ex)
+
+        return fallback
 
     def parse_config(self) -> dict:
         """Parse current YAML config into dict format expected by ESP32."""

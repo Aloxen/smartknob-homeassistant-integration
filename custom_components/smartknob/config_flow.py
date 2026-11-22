@@ -9,6 +9,7 @@ import yaml
 from homeassistant import config_entries
 from homeassistant.core import callback
 from homeassistant.data_entry_flow import FlowResult
+from homeassistant.helpers import selector
 import homeassistant.helpers.config_validation as cv
 
 from .const import (
@@ -89,15 +90,35 @@ class SmartKnobOptionsFlowHandler(config_entries.OptionsFlow):
                 errors["base"] = "invalid_yaml"
 
             if not errors:
+                # Save to smartknob.yaml in HA root config directory
+                file_path = self.hass.config.path("smartknob.yaml")
+                try:
+                    with open(file_path, "w", encoding="utf-8") as f:
+                        f.write(raw_yaml)
+                except Exception as ex:
+                    _LOGGER.warning("Could not write smartknob.yaml: %s", ex)
+
                 return self.async_create_entry(title="", data=user_input)
 
-        current_yaml = self.config_entry.options.get(
-            CONF_CONFIG_YAML,
-            self.config_entry.data.get(CONF_CONFIG_YAML, DEFAULT_CONFIG_YAML),
-        )
+        # Prefer reading from smartknob.yaml if it exists
+        current_yaml = ""
+        file_path = self.hass.config.path("smartknob.yaml")
+        try:
+            with open(file_path, "r", encoding="utf-8") as f:
+                current_yaml = f.read()
+        except Exception:
+            pass
+
+        if not current_yaml:
+            current_yaml = self.config_entry.options.get(
+                CONF_CONFIG_YAML,
+                self.config_entry.data.get(CONF_CONFIG_YAML, DEFAULT_CONFIG_YAML),
+            )
 
         options_schema = vol.Schema({
-            vol.Required(CONF_CONFIG_YAML, default=current_yaml): cv.string,
+            vol.Required(CONF_CONFIG_YAML, default=current_yaml): selector.TextSelector(
+                selector.TextSelectorConfig(multiline=True)
+            ),
         })
 
         return self.async_show_form(
